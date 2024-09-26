@@ -38,7 +38,7 @@ export const getDashboardDataController = async (req, res) => {
       .from("user")
       .select("user_id, email, name, created_at") // Specify fields to exclude password
       .order("created_at", { ascending: false })
-      .limit(7);
+      .limit(5);
 
     if (latestUsersError) {
       console.error("Error fetching latest users:", latestUsersError);
