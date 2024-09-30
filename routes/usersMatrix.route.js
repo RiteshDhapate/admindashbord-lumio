@@ -11,6 +11,8 @@ import { uploadFrontPageDataController } from "../controllers/uploadFrontPageDat
 import { insertLandingpageController } from "../controllers/inertlandingpage.controller.js";
 import { updateLandingPage } from "../controllers/updateLandingPage.controller.js";
 import { getLandingPageController } from "../controllers/getLandingPage.controller.js";
+import { getFAQs } from "../controllers/getFaq.controller.js";
+import { updateFaq } from "../controllers/updateFaq.controller.js";
 
 const route = express.Router();
 
@@ -26,4 +28,6 @@ route.post("/upload-front-page-data", uploadFrontPageDataController);
 route.post("/insert-landing-page", insertLandingpageController);
 route.post("/update-landing-page", updateLandingPage);
 route.get("/get-landing-page", getLandingPageController);
+route.get("/faqs", getFAQs);
+route.post("/update-faqs", updateFaq);
 export default route;
