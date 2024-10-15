@@ -13,6 +13,8 @@ import { updateLandingPage } from "../controllers/updateLandingPage.controller.j
 import { getLandingPageController } from "../controllers/getLandingPage.controller.js";
 import { getFAQs } from "../controllers/getFaq.controller.js";
 import { updateFaq } from "../controllers/updateFaq.controller.js";
+import { createAdminController } from "../controllers/createAdmin.controller.js";
+import { adminLogin } from "../controllers/adminLogin.controller.js";
 
 const route = express.Router();
 
@@ -30,4 +32,6 @@ route.post("/update-landing-page", updateLandingPage);
 route.get("/get-landing-page", getLandingPageController);
 route.get("/faqs", getFAQs);
 route.post("/update-faqs", updateFaq);
+route.post("/create-admin", createAdminController);
+route.post("/admin-login", adminLogin);
 export default route;
