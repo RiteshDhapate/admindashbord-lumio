@@ -17,7 +17,6 @@ export const adminLogin = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
-
     // Generate JWT token
     const token = jwt.sign(
       { adminId: admin._id, email: admin.email },
