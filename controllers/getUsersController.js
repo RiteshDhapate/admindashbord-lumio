@@ -1,3 +1,4 @@
+import { clerkClient } from "../services/clerkClient.js";
 import { supabase } from "../supabase/connection.js";
 
 export const getAllUsersController = async (req, res) => {
@@ -10,19 +11,21 @@ export const getAllUsersController = async (req, res) => {
     const end = start + parseInt(limit) - 1;
 
     // Fetch users from the Supabase 'user' table with the given range
-    const { data, error, count } = await supabase
-      .from("user")
-      .select("*", { count: "exact" }) // get total count as well
-      .range(start, end)
-      .order("created_at", { ascending: false });
+    // const { data, error, count } = await supabase
+    //   .from("user")
+    //   .select("*", { count: "exact" }) // get total count as well
+    //   .range(start, end)
+    //   .order("created_at", { ascending: false });
 
-    if (error) {
-      console.error("Error fetching users:", error);
-      return res.status(500).json({
-        success: false,
-        message: "Error occurred while fetching users.",
-      });
-    }
+    const offset = (page - 1) * limit;
+    const { data, totalCount:count } = await clerkClient.users.getUserList({
+      limit,
+      offset
+    })
+
+    console.log("my Data -> ",data, count);
+
+  
 
     // Pagination metadata
     const totalPages = Math.ceil(count / limit);

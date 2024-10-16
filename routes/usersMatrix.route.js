@@ -16,6 +16,7 @@ import { updateFaq } from "../controllers/updateFaq.controller.js";
 import { createAdminController } from "../controllers/createAdmin.controller.js";
 import { adminLogin } from "../controllers/adminLogin.controller.js";
 
+
 const route = express.Router();
 
 route.get("/total-users", getTotalUsersController);

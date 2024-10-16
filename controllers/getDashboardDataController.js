@@ -1,22 +1,17 @@
+import { clerkClient } from "../services/clerkClient.js";
 import { supabase } from "../supabase/connection.js";
 
 // Controller to get total users, total messages, latest users, and AI usage percentages
 export const getDashboardDataController = async (req, res) => {
   try {
-    // 1. Get total users count
-    const {
-      data: usersData,
-      error: userError,
-      count: userCount,
-    } = await supabase.from("user").select("*", { count: "exact" });
+    // // 1. Get total users count
+    // const {
+    //   data: usersData,
+    //   error: userError,
+    //   count: userCount,
+    // } = await supabase.from("user").select("*", { count: "exact" });
 
-    if (userError) {
-      console.error("Error fetching user count:", userError);
-      return res.status(500).json({
-        success: false,
-        message: "Something went wrong while fetching the total users.",
-      });
-    }
+ 
 
     // 2. Get total messages count
     const {
@@ -34,19 +29,11 @@ export const getDashboardDataController = async (req, res) => {
     }
 
     // 3. Get the latest 7 users without password
-    const { data: latestUsers, error: latestUsersError } = await supabase
-      .from("user")
-      .select("user_id, email, name, created_at") // Specify fields to exclude password
-      .order("created_at", { ascending: false })
-      .limit(5);
+    const { data:latestUsers, totalCount:userCount } = await clerkClient.users.getUserList({
+      limit:5
+    })
 
-    if (latestUsersError) {
-      console.error("Error fetching latest users:", latestUsersError);
-      return res.status(500).json({
-        success: false,
-        message: "Something went wrong while fetching the latest users.",
-      });
-    }
+  
 
     // 4. Get AI/coach usage percentages
     const { data: chatsData, error: chatsError } = await supabase
