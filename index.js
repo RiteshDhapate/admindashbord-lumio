@@ -20,7 +20,7 @@ DBInit();
 
 // (/) get route
 app.get("/", (req, res) => {
-    res.send("server is healthy");
+    res.send("server is healthy..");
 })
 
 const PORT = process.env.PORT || 2000;
