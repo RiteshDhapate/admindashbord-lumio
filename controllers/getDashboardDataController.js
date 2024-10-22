@@ -33,6 +33,21 @@ export const getDashboardDataController = async (req, res) => {
       limit:5
     })
 
+    const { data:demo1 } = await clerkClient.users.getUserList();
+
+    let paidUsers=0;
+    let freeUsers=0;
+
+    if(demo1){
+      demo1.forEach(user =>{
+        if(user.publicMetadata.trialStatus){
+          freeUsers++;
+        }else{
+          paidUsers++;
+        }
+      });
+    }
+      // console.log(freeUsers,paidUsers);
   
 
     // 4. Get AI/coach usage percentages
@@ -84,6 +99,8 @@ export const getDashboardDataController = async (req, res) => {
       message: "Dashboard data fetched successfully.",
       totalUsers: userCount,
       totalMessages: messageCount,
+      freeUsers,
+      paidUsers,
       latestUsers,
       aiUsage: aiS,
       aiUsagePercentages: aiPercentages,
