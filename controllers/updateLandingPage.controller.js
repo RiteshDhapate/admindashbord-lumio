@@ -2,17 +2,17 @@ import DataModel from "../model/landingPage.model.js";
 
 export const updateLandingPage = async (req, res) => {
   try {
-    const { firstText, text, secoundText } = req.body;
+    const {preTitle, firstText, text, secoundText } = req.body;
     const updatedData = await DataModel.findByIdAndUpdate(
-      "66f40d80bb55b40fd380022e",
+      "671737997e3788278d9d4b93",
       {
         title: firstText,
         subtitle: text,
         rotatingTexts: secoundText,
+        preTitle:preTitle,
       },
       { new: true, runValidators: true } // Return updated document and validate
     );
-
     if (!updatedData)
       return res.status(404).json({ message: "Data not found" });
     res.status(200).json(updatedData);

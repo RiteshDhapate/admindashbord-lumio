@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 // Define the schema
 const DataSchema = new mongoose.Schema(
   {
+    preTitle:{
+      type: String,
+      required: true
+    },
     title: {
       type: String,
       required: true,
