@@ -19,7 +19,7 @@ export const getDashboardDataController = async (req, res) => {
       error: messageError,
       count: messageCount,
     } = await supabase.from("message").select("*", { count: "exact" });
-
+    console.log(messageCount);
     if (messageError) {
       console.error("Error fetching message count:", messageError);
       return res.status(500).json({
