@@ -40,10 +40,10 @@ export const getDashboardDataController = async (req, res) => {
 
     if(demo1){
       demo1.forEach(user =>{
-        if(user.publicMetadata.trialStatus){
-          freeUsers++;
-        }else{
+        if(user.publicMetadata.paymentInfo){
           paidUsers++;
+        }else{
+          freeUsers++;
         }
       });
     }
